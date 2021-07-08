@@ -11,6 +11,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+
+		<h1><a href="#" id="logo">Home</a></h1>
 	</head>
 	<body class="is-preload">
 		<div id="page-wrapper">
@@ -62,15 +64,32 @@
 									Because of this, the system tends to the lowest energy but heat disturbs this tendency, thus creating the possibility of different structural phases. 
 									This can again be seen by the two figures, on the left a cold and nicely ordered state can be seen. On the right the system is hot and kaotic.
 									The question now is, how efficiently can an AI differentiate these two states and how much information can be thrown away for an AI to still efficiently distinguish them?
+									As it turns out very little information is required to efficiently classify a given dataset. 
+									The following machine learning algorithms were implemented:
+										<ul>
+											<li>Classification with mostly Dense Layers.</li>
+											<li>Classification with a convolutional architecture.</li>
+											<li>Random Forest classifier.</li>
+										</ul>
+									These were all tested on a full dataset and datasets which were heavily truncated with 
+									a principal component analysis.
+									All in all, these three models had similar accuracy of somewhere around 99%. The convolutional architecture achieved 
+									the best accuracy while the Random Forest on the reduced data achieved the best overall performance. 
+									The problem with the convolutional network is that PCA can not be utilised here, making 
+									this classification a lot more complex than necessary. However, as this is computationally most 
+									complex, the performance is also the best.
+									It becomes clear that this classification might be rather simple, as the best 
+									performance was always found when working with the reduced data (when possible).
 
-									
-									
-
-
-
-
+									</p>
+									<p>
+										<ul class="actions">
+										<li><a href="PDF/Ising_model_classification.pdf" class="button">Full documentation</a></li>
+										</ul>
 
 								</p>
+
+
 								<hr />
 								<h3>Sed Magna Ornare</h3>
 								<p>In vestibulum massa quis arcu lobortis tempus. Nam pretium arcu in odio vulputate luctus. Suspendisse euismod lorem eget lacinia fringilla. Sed sed felis justo. Nunc sodales elit in laoreet aliquam. Nam gravida, nisl sit amet iaculis porttitor, risus nisi rutrum metus. In accumsan lorem nunc ultrices a ac eu accumsan ac id nullam. Nec lobortis. Faucibus. Mi commodo laoreet arcu at non mi lacinia aliquet non lobortis phasellus accumsan nascetur varius. Integer orci porttitor eu faucibus aliquet faucibus ac accumsan adipiscing accumsan odio. Ut adipiscing.</p>
