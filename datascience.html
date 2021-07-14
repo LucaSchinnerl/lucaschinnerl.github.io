@@ -11,7 +11,6 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-
 		<h1><a href="#" id="logo">Data Science</a></h1>
 	</head>
 	<body class="is-preload">
@@ -100,19 +99,90 @@
 									This research combines the Kaya identity used to decompose carbon emissions into various 
 									factors and panel data analysis to extract the key impact factors on the changes in the 
 									growth of carbon emissions. Data from 120 different countries and territories from 1961 until 2015 
-									have been used. The results show that changes in technology have the strongest global effects, 
+									have been used. <br>
+									What is the Kaya identity?
+									To analyse and understand the changes in carbon emissions, the most popular tool used in literature is 
+									the Kaya identity. This tool has been used in most major analysis on carbon emissions. 
+									It very simple equation takes 4 factors into and links them to carbon emissions:
+									$$F = P \times \frac{G}{P} \times \frac{E}{G} \times \frac{F}{E}$$
+									In this equation,
+									<ul>
+										<li> \(F\) represents $CO_2$ emissions from human sources,</li>
+										<li> \(P\) represents population,</li>
+										<li> \(G\) represents GDP,</li>
+										<li> \(E\) represents energy consumption.</li>
+									</ul>
+									This is a simple yet beautiful way to link carbon emissions to the three factors GDP per capita, energy consumption per economic output and energy intensity.
+									I have extended this Kaya identity and subsequently applied panel data analysis. In total the formula looked like this:
+
+									$$  \Delta F =a+ b\times \Delta P_{(i,t)}+ c\times \Delta (\frac{G}{P})_{(i,t)}+d\times \Delta (\frac{E}{G})_{(i,t)}+ f\times \Delta ( \frac{F}{E})_{(i,t)}+ g\times \Delta Ex_{(i,t)} +h \times Gi_{(i,t)} + e_{(i,t)}$$
+									This formula might look very complecated, but breaking it down into its components, this becomes very clear.
+</p>
+<p>
+									<div class="table-wrapper">
+										<table class="alt">
+											<thead>
+												<tr>
+													<th>Name</th>
+													<th>Description</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>\(\Delta P_{(i,t)}\)</td>
+													<td>Population growth in %.</td>
+												</tr>
+												<tr>
+													<td>\(\Delta (\frac{G}{P})_{(i,t)}\)</td>
+													<td>Change in GDP per capita in %.</td>
+												</tr>
+												<tr>
+													<td>\(\Delta Ex_{(i,t)}\)</td>
+													<td> Change in exports in %.</td>
+												</tr>
+												<tr>
+													<td>\(\Delta (\frac{E}{G})_{(i,t)}\)</td>
+													<td>Change in energy efficiency in %.</td>
+												</tr>
+												<tr>
+													<td>\(\Delta ( \frac{F}{E})_{(i,t)}\)</td>
+													<td>Change in carbon intensity in %.</td>
+												</tr>
+												<tr>
+													<td>\(Gi_{(i,t)}\)</td>
+													<td>Gini index measuring income inequality.</td>
+												</tr>
+												<tr>
+													<td>\(e_{(i,t)}\)</td>
+													<td>Error term.</td>
+												</tr>
+												<tr>
+													<td>\(a - h\)</td>
+													<td>Coefficients for the fit.</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+									<span class="image left"><img src="images/Interaction_graph.png" alt="" /></span>
+									This means that in this research, the change in carbon emissions has been linked to all the factors described in the table aboth.
+
+
+									The results show that changes in technology have the strongest global effects, 
 									consequently followed by changes in population growth and affluence. Finally, the impact of 
-									income inequality on the change of carbon emissions can be analysed within the framework of 
-									the IPAT methodology, with the outcome that only high income nations show a significant relationship. 
+									income inequality on the change of carbon emissions is only relevant in high income nations. This can be seen very nicley with the picture on the left. There is no significance for income inequality for less wealthy nations,
+									while developed and rich nations show a connection.
+									<br>
+									These results have some important policy implemented to effectifely tackle the problem of carbon emissions: <br>
+									Obviously very few nations are willing to decrease their economic output to reduce carbon emission. Countries are only willing to participate in carbon mitigation efforts, if the total welfare of a nation increases. Currently the welfare of a nation is highly dependent on economic growth. Because of this, decreases in the growth of carbon emissions must be driven from different areas. To reduce the growth of carbon emissions, without affecting economic productivity, first and foremost the problem of population growth has to be tackled especially in developing countries. Technological advancements and economic growth are less important, but certainly still important. The Kyoto protocol and the Paris agreement both already have provisions of developed nations (Annex 1 countries) pledging to help developing nations (Annex 2 countries) to improve technological advancements. The focus here should be on improving energy efficiency. This mean that more funds should be put in to decreasing the amount of carbon that is produced for every unit of economic output. This can be done by decreasing the amount of energy machinery in manufacturing need (increase efficiency). Investments into renewable energy are less important in changing the direction of growth in carbon emissions due to the coefficient of carbon intensity being significantly smaller. Finally, for low income countries, counter intuitively it is more important to increase the average income of the population. Before all the basic needs are met, no focus on pro environmental actions can be taken. Once poverty is eradicated, income inequality can be tackled to decrease the growth of carbon emissions. However, at least in the context of climate change, improving income inequality will not help in the mitigation of carbon emissions.
+In high income countries, population growth is already almost constant and due to the fact that countries are not willing to decrease their economic output, technological advancements and social factors would have to be worked on. Conveniently, the key impact factor on change in carbon emission in high income countries is technology. As mentioned before, the focus should be put in decreasing the amount of carbon that is emitted from every unit of economic output. This can be combined with knowledge and technological advancements with developing nations, for them to also improve. Finally, tackling income inequality in very rich nations might also help to reduce the growth carbon emission.
 								</p>
 
-								<ul>
-									<li>Faucibus orci lobortis ac adipiscing integer.</li>
-									<li>Col accumsan arcu mi aliquet placerat.</li>
-									<li>Lobortis vestibulum ut magna tempor massa nascetur.</li>
-									<li>Blandit massa non blandit tempor interdum.</li>
-									<li>Lacinia mattis arcu nascetur lobortis.</li>
-								</ul>
+								<p>
+									<ul class="actions">
+									<li><a href="PDF/POL__Paper.pdf" class="button">Full paper</a></li>
+									</ul>
+
+							</p>
 							</section>
 
 					</div>
@@ -142,6 +212,8 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+			<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
 	</body>
 </html>
