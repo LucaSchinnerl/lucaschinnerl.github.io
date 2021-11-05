@@ -22,8 +22,8 @@
 				<ul>
 					<li><a href="index.html">Home</a></li>
 					<li><a href="datascience.html">Data science</a></li>
-					<li><a href="Physics.html">Physics</a></li>
-					<li><a href="Software.html">Software</a></li>
+					<!-- <li><a href="Physics.html">Physics</a></li>
+					<li><a href="Software.html">Software</a></li> -->
 
 
 				</ul>
@@ -34,8 +34,8 @@
 				<div id="main" class="wrapper style1">
 					<div class="container">
 						<header class="major">
-							<h2>Data science - UNDER CONSTRUCTION</h2>
-							<p>This section summarises some notable data science and data analysis projects I have completed over the years.</p>
+							<h2>Data science</h2>
+							<p>This page summarises some notable data science and data analysis projects I have completed over the years.</p>
 						</header>
 
 						<!-- Content -->
@@ -51,34 +51,34 @@
 										<li> Degree Centrality;</li>
 										<li> Eigenvector Centrality</li>
 										<li> Closeness Centrality;</li>
-										<li> Shortest path Centrality;</li>
+										<li> Shortest Path Centrality;</li>
 										<li> Group Centrality.</li>
 									</ul>
 									<span class="image left"><img src="images/graphempty.png" alt="" /></span>
 									However, a widely accepted method to quantify the importance of nodes is the betweenness centrality. 
 									Suppose we have a graph just like the one on the left. Which one do you think is the most important node? 
 									Most people would probably suggest node 4 as it connects the whole graph together. How can this be quantified? 
-									The most effective way to do this is to use exactly the betweeness cetnrality.
-									This method is based on a shortest paths 
+									The most effective way to do this is to use exactly this betweeness Centrality.
+									The method is based on a shortest paths 
 									approach. For every pair of vertices in a connected graph, there exists at least one shortest path between the vertices such that either the number of 
 									edges that the path passes through (for unweighted graphs) or the sum of the weights of the edges (for weighted graphs) is minimised. The betweenness 
 									centrality for each vertex is proportional to the number of these shortest paths that pass through the vertex. 
-									Going back to the example on the left, if you count all the shortest paths that run through node 4, we get 15. In comparision node 5 has only 6 shortest paths running through it. 
-									In other words, the betweenness centrality is very effictive in identifying that node 4 is by far the most important node in the graph. 
-									This all sounds great, but the problem is that calculating the exact betweenness centrality is extremely complex. 
-									A network with tens of thousands of nodes am millions of connections, it just is not fesable nor necessary to calculate this exactly.
+									Going back to the example on the left, if you count all the shortest paths that run through node 4, we get 15. In comparison node 5 only has 6 shortest paths running through it. 
+									In other words, the betweenness centrality is very effective in identifying that node 4 is by far the most important node in the graph. 
+									This all sounds great, but the problem is that calculating the exact betweenness centrality is extremely computationally expensive. 
+									A network with tens of thousands of nodes and millions of connections, it just is not feasible nor necessary to calculate this exactly.
 	
 									My research discusses a new algorithm which can be used to approximate the betweenness centrality for undirected and unweighted graphs. 
 									The discussion includes how the algorithm is able to approximate this centrality for very large networks, where a direct calculation is highly complex and takes a very long time.
-									This approach is based on network embedding and borrows tools from natural language processing:
+									This approach is based on network embedding and borrows tools from natural language processing. The algorithm goes as follows:
 								</p>
 								<p>
 	
 								<ol>  
-									<li>Choose two random nodes in the network;</li>  
-									<li>Preforme multiple weighted random walks on the network for both of the selected nodes, such as in the figure on the right;</li>  
-									<li>Order all visited nodes by their frequency of appearing an all of these random walks for both starting nodes;</li>  
-									<li>Move embedded nodes closer to eachother in the embedding space which appeared with a similar frequency.</li>  
+									<li>Randomly choose two different nodes on the network;</li>  
+									<li>Perform multiple weighted random walks on the network for both of the selected nodes, as seen on the figure to the right;</li>  
+									<li>Order all visited nodes by their frequency of appearing from all of these random walks for both starting nodes;</li>  
+									<li>Move embedded nodes closer to each other in the embedding space which appeared with a similar frequency.</li>  
 								   </ol>  
 								
 									</p>
@@ -86,10 +86,10 @@
 										<span class="image right"><img src="images/randomwalkexp.png" alt="" /></span>
 										Extensive testing of this method has shown that the approximation is only accurate for large and complex real world networks. 
 										For small uncomplicated graphs, there just is not enough information present for the algorithm to perform a good enough approximation.
-										In addtion, the algorithm has shown to not be able to effectively accurately approximate the betweenness centrality for scale free synthetic random graphs.
+										In addition, the algorithm has shown to not be able to effectively accurately approximate the betweenness centrality for scale free synthetic random graphs.
 										However, this is not a big problem, as for small networks with low mean degree, approximation does not make sense anyway, as the exact centrality can be computed very easily.
-										Furthermoe, applications to synthetic random graphs which in most cases do not represent any attributes from real world graphs is also not important. 
-										Applications to very large and complecated real world networks is what is important, which the algorithm is able to handle.
+										Furthermore, applications to synthetic random graphs which in most cases do not represent any attributes from real world graphs is also not important. 
+										Applications to very large and complicated real world networks is what is important, which the algorithm is able to handle.
 	
 	
 	
@@ -98,17 +98,18 @@
 	
 								<p>
 									<span class="image left"><img src="images/facebook_results.png" alt="" /></span>
-									The algorithm has amoung others been tested on a dataset provided by Facebook. 
-									It consists of 'circles' (or 'friends lists') from Facebook. 
-									The data was gathered from individual survey participants using the Facebook app. This network includes 4039 and 88234 edges.					
-									In the figure on the left you can see a graph of the notes present in the dataset embedded into 2 dimensions. The numbers next to each dot represent the exact betweenness centrality.
+									An application for this algorithm could for example be to estimate the most connected people on facebook. For this, 
+									Facebook provides a very nice dataset. 
+									It consists of 'circles' (or 'friends lists') from facebook users, from which a graph can be created. 
+									The data was gathered from individual survey participants using the Facebook app. This network includes 4039 nodes and 88234 edges.					
+									In the figure on the left you can see a graph of the nodes embedded into 2 dimensions. The numbers next to each dot represent the exact betweenness centrality.
 									The algorithm has quite nicely isolated nodes with a high centrality. In this case it can clearly be seen that more "important" nodes are located further to the right. 
 									All the "unimportant" nodes with a centrality close to 0 are clumped together in a big pile on the left.
 									This means that on this real world data set, the algorithm has been able to identify the most central nodes present in the network.
-									In addtionion, by choosing the right hyperparamethers, the algorithm was a lot faster than the exactl calculation.
+									In addition, by choosing the right hyperparameters, the algorithm was a lot faster than the exact calculation.
 									<p>
 										All in all, it can be said that generally the algorithm is successful for huge and complex real world (scale free) graphs, while applications to small, simple and non scale free graphs is limited.
-										Important nodes which act as hubs in the network are alomst always accuratly identified and isolated from unimportant nodes in the embedding space.
+										Important nodes which act as hubs in the network are almost always accurately identified and isolated from unimportant nodes in the embedding space.
 										
 									</p>
 									 
@@ -127,23 +128,24 @@
 								<p>
 									<span class="image left"><img src="images/spin0.png" alt="" /></span>
 									<span class="image left"><img src="images/spin1.png" alt="" /></span>
-									In statistical physics, modelling physical systems is a major component. The Ising model, named after the physicist Ernst Ising, 
-									is such a mathematical model to ferromagnetism (the machanism of permanent magnets). A dicrete variable that describes the magnetic dipole (the spin) describes the model. 
+									In statistical physics, scientists have been attempting to model physical systems for centuries. The Ising model, named after the physicist Ernst Ising, 
+									is such a model for ferromagnetism (the mechanism of permanent magnets). A discrete variable that describes the magnetic dipole (the spin) describes the model. 
 									The possible values of this variable are either spin up or spin down identified as +1 or -1.
 									The variable is placed on a graph, in this case on a 2 dimensional lattice. On the left you can see two examples of this.
-									Yellow represent a spin of +1, while purple represent -1. 
+									Yellow represent a spin of +1, while purple represents -1. 
 									The model is dynamic and each spin interacts with its direct neighbors.
 									
-									Neighboring spins that have the same value, have a lower energy than those that disagree.
-									Similarly to an object falling of a table, every physical sytem tends to move to its lowest energy state, given enough time.
+									Neighboring spins that have the same value, have a lower energy than those that disagree. 
+									This means in a system with only spin downs, energy in the system would be minimised.
+									Similarly to an object falling of a table, every physical system tends to move to its lowest energy state, given enough time.
 
 								</p>	
 								<p>
 				
-									The probablitiy of a spin randomly changing is directly proportional to the temperature of the system.
+									To simulate dynamics in the system, spins can randomly change with a probability that is directly proportional to the temperature of the system.
 									Because of this, the system tends to the lowest energy but heat disturbs this tendency, thus creating the possibility of different structural phases. 
-									This can again be seen by the two figures, on the left a cold and nicely ordered state can be seen. On the right the system is hot and kaotic.
-									The question now is, how efficiently can an AI differentiate these two states and how much information can be thrown away for an AI to still efficiently distinguish them?
+									This can again be seen by the two figures above. The left images shows a cold and nicely ordered state. On the right the system is hot and chaotic.
+									The question now is, how efficiently can an AI differentiate these two states and how much information can be thrown away for an AI to still distinguish them?
 									As it turns out very little information is required to efficiently classify a given dataset. 
 									The following machine learning algorithms were implemented:
 										<ul>
@@ -154,13 +156,10 @@
 									These were all tested on a full dataset and datasets which were heavily truncated with 
 									a principal component analysis.
 									All in all, these three models had similar accuracy of somewhere around 99%. The convolutional architecture achieved 
-									the best accuracy while the Random Forest on the reduced data achieved the best overall performance. 
-									The problem with the convolutional network is that PCA can not be utilised here, making 
-									this classification a lot more complex than necessary. However, as this is computationally most 
+									the best accuracy while the Random Forest on truncated data achieved the best overall performance with high accuracy and very low computational cost. 
+									The problem with the convolutional network is that PCA can not be utilised here as it transforms 2D into 1D data. This makes the 
+									classification a lot more complex than necessary. However, as this is computationally most 
 									complex, the performance is also the best.
-									It becomes clear that this classification might be rather simple, as the best 
-									performance was always found when working with the reduced data (when possible).
-
 									</p>
 									<p>
 										<ul class="actions">
@@ -176,15 +175,17 @@
 								<p>
 									Climate change is one of the biggest challenge humanity has ever faced. 
 									In recent years mitigation efforts all around the globe have ramped up. 
-									These efforts, however, have not been successful. 
-									This research combines the Kaya identity used to decompose carbon emissions into various 
-									factors and panel data analysis to extract the key impact factors on the changes in the 
-									growth of carbon emissions. Data from 120 different countries and territories from 1961 until 2015 
-									have been used. <br>
+									These efforts, however, have not been as successful as we hoped. 
+									This research combines the Kaya identity, used to decompose carbon emissions into various 
+									factors, with panel data analysis to extract the key impact factors on the changes in 
+									growth of carbon emissions. The ultimate goal was to develope some policy recommendations to be able to tackle the climate crisis 
+									more efficiently.
+									Data from 120 different countries and territories from 1961 until 2015 provided by the World Bank
+									was used. <br>
 									What is the Kaya identity?
 									To analyse and understand the changes in carbon emissions, the most popular tool used in literature is 
 									the Kaya identity. This tool has been used in most major analysis on carbon emissions. 
-									It very simple equation takes 4 factors into and links them to carbon emissions:
+									It is a very simple equation that takes 4 factors into account and links them to carbon emissions:
 									$$F = P \times \frac{G}{P} \times \frac{E}{G} \times \frac{F}{E}$$
 									In this equation,
 									<ul>
@@ -194,10 +195,10 @@
 										<li> \(E\) represents energy consumption.</li>
 									</ul>
 									This is a simple yet beautiful way to link carbon emissions to the three factors GDP per capita, energy consumption per economic output and energy intensity.
-									I have extended this Kaya identity and subsequently applied panel data analysis. In total the formula looked like this:
+									I have extended this Kaya identity and subsequently applied panel data analysis. In total the equation looks like this:
 
 									$$  \Delta F =a+ b\times \Delta P_{(i,t)}+ c\times \Delta (\frac{G}{P})_{(i,t)}+d\times \Delta (\frac{E}{G})_{(i,t)}+ f\times \Delta ( \frac{F}{E})_{(i,t)}+ g\times \Delta Ex_{(i,t)} +h \times Gi_{(i,t)} + e_{(i,t)}$$
-									This formula might look very complecated, but breaking it down into its components, this becomes very clear.
+									This formula might look very complicated, but breaking it down into its components, this becomes very clear.
 </p>
 <p>
 									<div class="table-wrapper">
@@ -245,18 +246,37 @@
 										</table>
 									</div>
 									<span class="image left"><img src="images/Interaction_graph.png" alt="" /></span>
-									This means that in this research, the change in carbon emissions has been linked to all the factors described in the table aboth.
+									This means that in this research, the change in carbon emissions has been linked to all the factors described in the table above.
 
-
-									The results show that changes in technology have the strongest global effects, 
-									consequently followed by changes in population growth and affluence. Finally, the impact of 
-									income inequality on the change of carbon emissions is only relevant in high income nations. This can be seen very nicley with the picture on the left. There is no significance for income inequality for less wealthy nations,
-									while developed and rich nations show a connection.
+									I decided to go with panel data analysis to extract as much information from the data as possible. 
+									This type of analysis also takes the time sequence of the data into account.
+									The results show that changes in technological improvements have the strongest global effects, 
+									followed by changes in population growth and affluence. Finally, the impact of 
+									income inequality on the change of carbon emissions is only relevant in high income nations. 
+									This can be very nicely seen in the figure on the left. There is no significance for income inequality for less wealthy nations,
+									while developed and rich nations show a correlation.
 									<br>
-									These results have some important policy implemented to effectifely tackle the problem of carbon emissions: <br>
-									Obviously very few nations are willing to decrease their economic output to reduce carbon emission. Countries are only willing to participate in carbon mitigation efforts, if the total welfare of a nation increases. Currently the welfare of a nation is highly dependent on economic growth. Because of this, decreases in the growth of carbon emissions must be driven from different areas. To reduce the growth of carbon emissions, without affecting economic productivity, first and foremost the problem of population growth has to be tackled especially in developing countries. Technological advancements and economic growth are less important, but certainly still important. The Kyoto protocol and the Paris agreement both already have provisions of developed nations (Annex 1 countries) pledging to help developing nations (Annex 2 countries) to improve technological advancements. The focus here should be on improving energy efficiency. This mean that more funds should be put in to decreasing the amount of carbon that is produced for every unit of economic output. This can be done by decreasing the amount of energy machinery in manufacturing need (increase efficiency). Investments into renewable energy are less important in changing the direction of growth in carbon emissions due to the coefficient of carbon intensity being significantly smaller. Finally, for low income countries, counter intuitively it is more important to increase the average income of the population. Before all the basic needs are met, no focus on pro environmental actions can be taken. Once poverty is eradicated, income inequality can be tackled to decrease the growth of carbon emissions. However, at least in the context of climate change, improving income inequality will not help in the mitigation of carbon emissions.
-In high income countries, population growth is already almost constant and due to the fact that countries are not willing to decrease their economic output, technological advancements and social factors would have to be worked on. Conveniently, the key impact factor on change in carbon emission in high income countries is technology. As mentioned before, the focus should be put in decreasing the amount of carbon that is emitted from every unit of economic output. This can be combined with knowledge and technological advancements with developing nations, for them to also improve. Finally, tackling income inequality in very rich nations might also help to reduce the growth carbon emission.
+									These results have some important policy implications to effectively tackle the problem of carbon emissions: <br>
+									Obviously very few nations are willing to decrease their economic output to reduce carbon emission. 
+									Countries are only willing to participate in carbon mitigation efforts, if the total welfare of a nation increases. 
+									Currently the welfare of a nation is highly dependent on economic growth. Consequently, decreases in the growth of carbon emissions must be driven 
+									from different areas. To reduce the growth of carbon emissions, without affecting economic productivity, 
+									first and foremost the problem of population growth has to be tackled especially in developing countries. 
+									Technological advancements and economic growth are less important, but certainly still a factor. The Kyoto protocol and the Paris agreement both 
+									already have provisions of developed nations (Annex 1 countries) pledging to help developing nations (Annex 2 countries) to improve technological advancements. 
+									The focus here should be on improving energy efficiency. This mean that more funds should be put into decreasing the amount of carbon that is produced 
+									for every unit of economic output. This can be done by decreasing the amount of energy machinery in manufacturing need (increase efficiency). 
+									Investments into renewable energy are less important in changing the direction of growth in carbon emissions. 
+									Finally, for low income countries, counter intuitively it is important to increase the average income of the population. 
+									Before all the basic needs are met, no focus on pro environmental actions can be taken. Once poverty is eradicated, income inequality 
+									can be tackled to decrease the growth of carbon emissions. However, at least in the context of climate change, improving income inequality will not 
+									help in the mitigation of carbon emissions.
+									In high income countries, population growth is already almost constant and due to the fact that countries are not willing to 
+									decrease their economic output, technological advancements and social factors would have to be improved. 
+									Conveniently, the key impact factor on change in carbon emission in high income countries is technology. 
+									Finally, tackling income inequality in very rich nations might also help to reduce the growth carbon emission.
 								</p>
+
 
 								<p>
 									<ul class="actions">
