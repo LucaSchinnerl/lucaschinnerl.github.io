@@ -1,8 +1,0 @@
-AuthType Basic  
-AuthName "restricted area"  
-AuthUserFile assets/css/images/restricted/.htpasswd  
-require valid-user
-
-<Files "assets/css/images/restricted/my_blog_afqpow.html">
-  Require valid-user
-</Files>
