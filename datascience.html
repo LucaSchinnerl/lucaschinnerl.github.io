@@ -6,7 +6,8 @@
 -->
 <html>
 	<head>
-		<title>Data Science</title>
+		<title>Portfolio</title>
+		
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -21,7 +22,7 @@
 			<nav id="nav">
 				<ul>
 					<li><a href="index.html">Home</a></li>
-					<li><a href="datascience.html">Data science</a></li>
+					<li><a href="datascience.html">Portfolio</a></li>
 					<!-- <li><a href="Physics.html">Physics</a></li>
 					<li><a href="Software.html">Software</a></li> -->
 
@@ -34,15 +35,206 @@
 				<div id="main" class="wrapper style1">
 					<div class="container">
 						<header class="major">
-							<h2>Data science</h2>
+							<h2>Data Science Portfolio</h2>
 							<p>This page summarises some notable data science and data analysis projects I have completed over the years.</p>
 						</header>
 
 						<!-- Content -->
 							<section id="content">
+
+
+
+
 								<a href="#" class="image fit"><img src="images/pic07.jpg" alt="" /></a>
 								
-								<h3>Estimating the Betweenness Centrality of Nodes with Network Embedding</h3>
+								<h2>Selective Background Monte Carlo Simulation at Belle II</h2>
+								<p>
+									<h4> History </h4>
+									In high energy physics (HEP), physicists work with particle accelerators to analyze very specific processes that are happening when 
+									particles interact with each other. The goal here is to find processes that with our current models
+									are not expected to occur. This could sounds counterintuitive at first, why do we want to disprove our current theories you might ask?
+									It quite simple, we know the current best theory of the universe that we have, the standard model, is not the whole story. 
+									In other words, we know there is something wrong with it, but we do not know what exactly yet (hopefully). 
+									To find out what is wrong, we need data. A LOT of data.
+									While gathering data for groundbreaking discoveries in the past was experimentally relatively easy, the story today is much more complicated.
+									As an example, the experiment that led to the 1980 Nobel Prize in Physics and disproved a what was thought to be a fundamental symmetry 
+									in the universe,
+									was performed in just a few days. The two scientists behind it actually wanted to measure something completely different, but
+									kind of stumbled upon their revolutionary discoveries. Meanwhile the 2013 Nobel Prize in Physics, the discovery of the Higgs Boson
+									and the last Nobel Prize in HEP, was decades in the making. Thousands of scientists collaborated to slowly improve measurements
+									and increase the statistical significance that this particle actually exists. For this a massive amount of data was collected.
+									Measurements today require even more resources, time and most importantly data.
+								</p>
+								<p>
+									<h4>The Belle II Experiment</h4>
+									<span class="image right"><img src="images/Overview-of-the-Belle-II-detector.jpg" alt="" /></span>
+									Belle II is a detector at the SuperKEKB particle accelerate located just outside of Tokyo. 
+									On the right you can see this massive and beautiful machine.
+									The goal of Belle II is to measure extremely rare processes, to find disagreements with the standard model.
+									For this over its lifetime, this experiment will obtain an integrated luminosity of 50 inverse Attobarn worth of data.
+									This is physics lingo for a massive amount of data (in the exabyte range).
+									Performing any type of measurements on this data requires the modeling of the experiment as best as possible to 
+									first prepare each analysis. 
+									In the case of the Belle II experiment this is done in the form of Monte Carlo (MC) simulations. 
+									This allows fine tuning physics analyses to be able to filter the signal, 
+									so the physics process being searched for, from everything else, the background. 
+									Since a large portion of the measurements will be focused on so-called rare processes, 
+									a strong statistical knowledge of the backgrounds 
+									is required to accurately distinguish the signal from the remaining background. 
+									Simulating the required amount of data is not feasible using current or near future resources so we have to be creative. 
+								<p>
+								<p>
+								
+									<h4>Selective Background Monte Carlo Simulation</h4>
+									<span class="image left"><img src="images/MC_time.png" alt="" /></span>
+									On the left you can see a usual dataflow withing a MC simulation (disregard the NN filter for now). 
+									We start of with an event generation stage (in green). Here we generate a random event that we except would occure in nature.
+									We now want to know how the detector would measure this event. In other words how do we expect the detector output to look like if 
+									our generated process were to be measured by it. This is done in the simulation and reconstruction phase.  
+									In essence, we have to simulate every single component in 
+									the massive detector you see above. This is computational extremely expensive and takes up more than 99% of time of the whole 
+									MC simulation. Finally, in the last step, a skim is applied. This is a filter that uses the data that we have just simulated in 
+									the step before. It is
+									applied to the data to remove events that are not of interest for our physics analysis. 
+									Depending on the analysis, less than 1% of events survive this step.
+								</p>
+								<p>
+									Basically what we have done is we generated our events, painstakingly simulated all of them and then trivially threw 
+									almost all of them away during skimming. This is horribly inefficient. 
+									It would be nice if we already knew at the event generation stage, which events are going to be interesting for us and
+									only then simulate exactly these events. This is what we mean by selective background Monte Carlo simulation.
+									To do this we have injected a neural network between the event generation and simulation stage that 
+									tries to predict which events are going to survive the skim from the information we have at the event generation.
+								</p>
+
+								<p>
+									<h4>The Machine Learning Model</h4>
+									<span class="image right"><img src="images/graph_structure.png" alt="" /></span>
+
+									To built the perfect model, we need to know what information we have available and how it is structured.
+									A decay process kind of looks like a tree. We start with a big and heavy particle which then splits into smaller and smaller ones 
+									until we arrive at our end products. Particles rae represented by nodes in a graph while the edges represent the decay channels.
+									You can see an example of such a process on the right. Each node has some properties, like mass, charge, particle ID, energy etc.
+									The best way to make use of this type of graph structured data is to use 
+									a Graph Neural Network. Due to the fact that each graph provides a massive amount of data, it is reasonable to assume that we will 
+									need a network with a huge amount of trainable parameters. The model that we have utilised is a Graph Attention Network with 
+									Global Attention Pooling. In total there are over 100,000 trainable parameters in this network.
+
+								</p>
+
+								
+								<p>
+									<h4>Bias Mitigation</h4>
+									<span class="image left"><img src="images/fun_MC.png" alt="" /></span>
+									
+									When applying the NN filter, we have to make sure that the NN does not introduce a bias in the resulting output. 
+									In general, the NN can misclassify events in two ways. It can keep events that will later be discarded by the skim (false positives), or 									
+									it can throw away events that that would have passed the skim if it survived the NN filter (false negatives).
+									
+									The latter are actually very problematic.
+									
+									While false positives just reduce the performance, false negatives actually introduce a bias in our data.
+								</p>
+								<p>
+									<span class="image right"><img src="images/bias_mbc.png" alt="" hight = 200/></span>
+									On the right you can see an example of this. In simple terms what you see here is the reconstructed Energy of the whole decay process.
+									The higher we set the cut for discarding events with the NN output, the more biased our data gets.
+									This is because the more selective we are with letting events thorough the NN filter, the more we introduce false negatives.
+									This is unacceptable for an analysis and we have to mitigate this. Luckily some smart people have thought about some 
+									extremely useful methods a few hundred years ago. The technique we have opted to use is importance sampling: 
+
+
+								</p>
+								<ul>
+									<li> Instead of introducing a cut, we take the NN output as probability that we are keeping an event.</li>
+									<li> We attach a weight to each event with \(w_i = \frac{1}{p_{NN}}\).</li>
+									<li> With importance sampling there is no bias by construction.</li>
+
+								</ul>
+	
+								With this relatively easy method, we were able to mitigate the complete bias. 
+								However, due to the fact that we are working with weighted events now (some events are now more important than others), 
+								we have to define a new measure on how many events we have simulated.
+								Just using the total amount of events is not sufficient.
+								In importance sampling, this measure is called the <b>Effective Sample Size</b>:
+								$$N_{eff} = \frac{(\sum_i w_i)^2}{\sum_i w_i ^ 2}$$
+
+								This equation relates the information (or statistics) we have with unweighted events (just the number of events that have passed the skim) 
+								to the mix of weighted events we have after importance sampling.
+
+								Finally, what we want to optimse with the NN filter is the speedup, how much faster we can simulate the same effective sample size, rather
+								than the accuracy of the model. While the accuracy is correlated to the speedup, it is not the most efficient way to train the network.
+								Instead we have opted to use a custom loss function:
+
+								$$R_0 = \frac{t_{\text{no_filter}}}{t_{\text{filter}}}$$
+								
+								This is the ratio of the time it takes to simulate the same effective sample size with the NN filter and without it.
+								If it gets lower, the performance is larger.
+
+								<p>
+									<h4>Analysis</h4>
+								
+								<span class="image right"><img src="images/train_loss_nROE.png" alt="" hight = 200/></span>
+
+								To see how selective background MC simulation performs in practice, I have analysed the NN filter on a specific decay process:
+								<h2>
+								$$
+								B \rightarrow K \nu \nu
+								$$
+								</h2>
+								This process involves a B meson decaying into a K0 and two neutrinos and can only be mediated with flavor-changing neutral-current transitions.
+								The process is described in detail in <a href = https://arxiv.org/pdf/1303.7465.pdf>this paper </a>. All this complicated terminology just means 
+								that this process is ultra rare, highly sensitive to new physics (and therefore a good candidate for groundbreaking discoveries) and a lot 
+								of data is required for the analysis. A good candidate for a NN filter.
+								The cuts I have applied in the skim to produce the training data are:
+								<ul>
+									<li> Increasing the cut on the reconstructed energy of the mother particle (a B) and 
+										the reconstruction probabilities of the particles. This is motivated by increasing
+										efficiencies on the reconstructed origin particle (the \(B_{\text{tag}}\)).</li>
+									<li> Require that a the whole decay chain could be reconstructed.
+										In technical terms, was there a \(\Upsilon(4S)\) with a \(B \rightarrow K^{(*)}\nu \bar{\nu}\)?</li>
+									<li> 
+										Ensures that all particles from the primary physics event (\(B \rightarrow K \nu \nu\)) were used in the reconstruction.
+										In other words require that there are no chared tracks in the rest of event when  we reconstructed the \(\Upsilon(4S)\).</li>
+								</ul>
+								
+								On the right you can see the loss evolution when training the NN. Remember the loss here represents the inverse speedup, if it is smaller than 
+								1 the NN is performing better than a brute force approach. You can also see when I allow fewer chared tracks in the rest of event, 
+								the performance increases. The best performance is achieved when no tracks are allowed, showing that my previous applied cuts are indeed sensible.
+								All in all the best speedup I was able to achieve was just less than 5. This means with the NN filter we can simulate events 5 times as fast as without.
+
+								
+								</p>
+
+								<p>	
+									<h4>Conclusion</h4>
+									In this short blog post I was not able to go into all the technical details and had to omit a lot of very important information.
+									Once I finish writing my master thesis I will include this, so if you are interested in the technical details, please check it out then.
+									For now you can go through my slides for a talk I gave at 
+									the <a href = "https://www.dpg-verhandlungen.de/year/2022/conference/heidelberg/part/t/session/53/contribution/2">
+										DPG conference in Heidelberg</a> (see blow for slides).
+									However, I think this clearly demonstrates that smart background simulation has the potential to significantly improve simulation speeds.
+									For the process \(B \rightarrow K^{(*)}\nu \bar{\nu}\), this has worked especially well, improving the 
+									the rate of the speedup to almost 5.
+
+								</p>
+								
+								<p>
+									<ul class="actions">
+									<li><a href="PDF/practial_phase_talk.pdf" class="button">Full paper</a></li>
+									</ul>
+	
+							</p>
+
+
+
+
+
+
+							<hr />
+
+								
+								<h2>Estimating the Betweenness Centrality of Nodes with Network Embedding</h2>
 								<p>
 									In graph theory, a key area is to estimate the importance of specific nodes in a network. This is usually done with a centrality measure. 
 									There are many different types of these centrality measures and they can be classified under the following categories (among others):
@@ -58,7 +250,7 @@
 									However, a widely accepted method to quantify the importance of nodes is the betweenness centrality. 
 									Suppose we have a graph just like the one on the left. Which one do you think is the most important node? 
 									Most people would probably suggest node 4 as it connects the whole graph together. How can this be quantified? 
-									The most effective way to do this is to use exactly this betweeness Centrality.
+									The most effective way to do this is to use exactly this betweeness centrality.
 									The method is based on a shortest paths 
 									approach. For every pair of vertices in a connected graph, there exists at least one shortest path between the vertices such that either the number of 
 									edges that the path passes through (for unweighted graphs) or the sum of the weights of the edges (for weighted graphs) is minimised. The betweenness 
@@ -86,7 +278,7 @@
 										<span class="image right"><img src="images/randomwalkexp.png" alt="" /></span>
 										Extensive testing of this method has shown that the approximation is only accurate for large and complex real world networks. 
 										For small uncomplicated graphs, there just is not enough information present for the algorithm to perform a good enough approximation.
-										In addition, the algorithm has shown to not be able to effectively accurately approximate the betweenness centrality for scale free synthetic random graphs.
+										In addition, the algorithm has shown to not be able to effectively and accurately approximate the betweenness centrality for scale free synthetic random graphs.
 										However, this is not a big problem, as for small networks with low mean degree, approximation does not make sense anyway, as the exact centrality can be computed very easily.
 										Furthermore, applications to synthetic random graphs which in most cases do not represent any attributes from real world graphs is also not important. 
 										Applications to very large and complicated real world networks is what is important, which the algorithm is able to handle.
@@ -102,7 +294,7 @@
 									Facebook provides a very nice dataset. 
 									It consists of 'circles' (or 'friends lists') from facebook users, from which a graph can be created. 
 									The data was gathered from individual survey participants using the Facebook app. This network includes 4039 nodes and 88234 edges.					
-									In the figure on the left you can see a graph of the nodes embedded into 2 dimensions. The numbers next to each dot represent the exact betweenness centrality.
+									In the figure on the left you can see a plot of the nodes embedded into 2 dimensions. The numbers next to each dot represent the exact betweenness centrality.
 									The algorithm has quite nicely isolated nodes with a high centrality. In this case it can clearly be seen that more "important" nodes are located further to the right. 
 									All the "unimportant" nodes with a centrality close to 0 are clumped together in a big pile on the left.
 									This means that on this real world data set, the algorithm has been able to identify the most central nodes present in the network.
@@ -124,7 +316,7 @@
 							</p>
 
 							<hr />
-								<h3>Classification of the Ising Model</h3>
+								<h2>Classification of the Ising Model</h2>
 								<p>
 									<span class="image left"><img src="images/spin0.png" alt="" /></span>
 									<span class="image left"><img src="images/spin1.png" alt="" /></span>
@@ -159,7 +351,7 @@
 									the best accuracy while the Random Forest on truncated data achieved the best overall performance with high accuracy and very low computational cost. 
 									The problem with the convolutional network is that PCA can not be utilised here as it transforms 2D into 1D data. This makes the 
 									classification a lot more complex than necessary. However, as this is computationally most 
-									complex, the performance is also the best.
+									complex, the accuracy is also the best.
 									</p>
 									<p>
 										<ul class="actions">
@@ -171,7 +363,7 @@
 
 
 								<hr />
-								<h3>Key Impact Factors of Carbon Emissions</h3>
+								<h2>Key Impact Factors of Carbon Emissions</h2>
 								<p>
 									Climate change is one of the biggest challenge humanity has ever faced. 
 									In recent years mitigation efforts all around the globe have ramped up. 
@@ -189,7 +381,7 @@
 									$$F = P \times \frac{G}{P} \times \frac{E}{G} \times \frac{F}{E}$$
 									In this equation,
 									<ul>
-										<li> \(F\) represents $CO_2$ emissions from human sources,</li>
+										<li> \(F\) represents \(CO_2\) emissions from human sources,</li>
 										<li> \(P\) represents population,</li>
 										<li> \(G\) represents GDP,</li>
 										<li> \(E\) represents energy consumption.</li>
@@ -323,7 +515,10 @@
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
 			<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-			<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+			<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+				MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+			</script>
+
 
 	</body>
 </html>
