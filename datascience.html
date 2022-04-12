@@ -182,26 +182,26 @@
 								B \rightarrow K \nu \nu
 								$$
 								</h2>
-								This process involves a B meson decaying into a K0 and two neutrinos and can only be mediated with flavor-changing neutral-current transitions.
+								This process involves a B meson decaying into a K0 and two neutrinos and can only be mediated through flavor-changing neutral-current transitions.
 								The process is described in detail in <a href = https://arxiv.org/pdf/1303.7465.pdf>this paper </a>. All this complicated terminology just means 
-								that this process is ultra rare, highly sensitive to new physics (and therefore a good candidate for groundbreaking discoveries) and a lot 
-								of data is required for the analysis. A good candidate for a NN filter.
+								that this process is ultra rare, highly sensitive to new physics (and therefore a good contender for groundbreaking discoveries) and a lot 
+								of data is required for the analysis. A good candidate for our NN filter.
 								The cuts I have applied in the skim to produce the training data are:
 								<ul>
-									<li> Increasing the cut on the reconstructed energy of the mother particle (a B) and 
+									<li> Increasing the cut on the reconstructed energy of the mother particle (the B mesons)) and 
 										the reconstruction probabilities of the particles. This is motivated by increasing
 										efficiencies on the reconstructed origin particle (the \(B_{\text{tag}}\)).</li>
 									<li> Require that a the whole decay chain could be reconstructed.
 										In technical terms, was there a \(\Upsilon(4S)\) with a \(B \rightarrow K^{(*)}\nu \bar{\nu}\)?</li>
 									<li> 
 										Ensures that all particles from the primary physics event (\(B \rightarrow K \nu \nu\)) were used in the reconstruction.
-										In other words require that there are no chared tracks in the rest of event when  we reconstructed the \(\Upsilon(4S)\).</li>
+										In other words, require that there are no chared tracks in the rest of event when  we reconstructed the \(\Upsilon(4S)\).</li>
 								</ul>
 								
 								On the right you can see the loss evolution when training the NN. Remember the loss here represents the inverse speedup, if it is smaller than 
-								1 the NN is performing better than a brute force approach. You can also see when I allow fewer chared tracks in the rest of event, 
+								1 the NN is performing better than a brute force approach. You can also see than when I allow fewer chared tracks in the rest of event, 
 								the performance increases. The best performance is achieved when no tracks are allowed, showing that my previous applied cuts are indeed sensible.
-								All in all the best speedup I was able to achieve was just less than 5. This means with the NN filter we can simulate events 5 times as fast as without.
+								All in all the best speedup I was able to achieve was just less than 5. This means with the NN filter we can simulate events 5 times as fast than without.
 
 								
 								</p>
@@ -210,7 +210,7 @@
 									<h4>Conclusion</h4>
 									In this short blog post I was not able to go into all the technical details and had to omit a lot of very important information.
 									Once I finish writing my master thesis I will include this, so if you are interested in the technical details, please check it out then.
-									For now you can go through my slides for a talk I gave at 
+									For now you can go through my a little outdated slides for a talk I gave at 
 									the <a href = "https://www.dpg-verhandlungen.de/year/2022/conference/heidelberg/part/t/session/53/contribution/2">
 										DPG conference in Heidelberg</a> (see blow for slides).
 									However, I think this clearly demonstrates that smart background simulation has the potential to significantly improve simulation speeds.
@@ -221,7 +221,7 @@
 								
 								<p>
 									<ul class="actions">
-									<li><a href="PDF/practial_phase_talk.pdf" class="button">Full paper</a></li>
+									<li><a href="PDF/practial_phase_talk.pdf" class="button">DPG Talk</a></li>
 									</ul>
 	
 							</p>
